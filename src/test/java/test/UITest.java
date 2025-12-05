@@ -146,10 +146,9 @@ public class UITest {
     @DisplayName("Заполнить поле \"Номер карты\", буквенными значениями")
     public void shouldAppearErrorMsgWhenEnteringCardNumberLetterValues() {
         var buyingTripPage = new BuyingTripPage();
-        String card = "11112222hjilbvft";
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(card, getMonth(0), getYear(3), getHolder(), getCVC());
+        buyingTripPage.cardData(getLettersNumberCard(), getMonth(0), getYear(3), getHolder(), getCVC());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgNumberCard("Неверный формат");
@@ -171,10 +170,9 @@ public class UITest {
     @DisplayName("Ввод несуществующего месяца в поле \"Месяц\"")
     public void shouldAppearErrorMsgWhenEnteringMonthThatDoesNotExist() {
         var buyingTripPage = new BuyingTripPage();
-        String month = "13";
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(getNumberCardApproved(), month, getYear(3), getHolder(), getCVC());
+        buyingTripPage.cardData(getNumberCardApproved(), getNonExistentMonth(), getYear(3), getHolder(), getCVC());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgMonth("Неверно указан срок действия карты");
@@ -184,10 +182,9 @@ public class UITest {
     @DisplayName("Ввод нулевого месяца в поле \"Месяц\"")
     public void shouldAppearErrorMsgWhenEnteringZeroMonth() {
         var buyingTripPage = new BuyingTripPage();
-        String month = "00";
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(getNumberCardApproved(), month, getYear(3), getHolder(), getCVC());
+        buyingTripPage.cardData(getNumberCardApproved(), getZeroMonth(), getYear(3), getHolder(), getCVC());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgMonth("Неверно указан срок действия карты");
@@ -197,10 +194,9 @@ public class UITest {
     @DisplayName("Ввод месяца без ведущего нуля в поле \"Месяц\"")
     public void shouldAppearErrorMsgWhenEnteringMonthWithoutLeadingZero() {
         var buyingTripPage = new BuyingTripPage();
-        String month = "5";
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(getNumberCardApproved(), month, getYear(3), getHolder(), getCVC());
+        buyingTripPage.cardData(getNumberCardApproved(), get1Characters(), getYear(3), getHolder(), getCVC());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgMonth("Неверный формат");
@@ -308,7 +304,7 @@ public class UITest {
         var buyingTripPage = new BuyingTripPage();
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(getNumberCardApproved(), getMonth(3), getYear(3), getHolder(), getCVC1Characters());
+        buyingTripPage.cardData(getNumberCardApproved(), getMonth(3), getYear(3), getHolder(), get1Characters());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgCvc("Неверный формат");
@@ -320,7 +316,7 @@ public class UITest {
         var buyingTripPage = new BuyingTripPage();
 
         buyingTripPage.clickButtonBuy();
-        buyingTripPage.cardData(getNumberCardApproved(), getMonth(3), getYear(3), getHolder(), getCVC2Characters());
+        buyingTripPage.cardData(getNumberCardApproved(), getMonth(3), getYear(3), getHolder(), get2Characters());
         buyingTripPage.clickButtonContinue();
 
         buyingTripPage.getErrorMsgCvc("Неверный формат");

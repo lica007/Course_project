@@ -5,8 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -25,7 +24,7 @@ public class BuyingTripPage {
     private final SelenideElement errorMsgYear = $$("span.input__top").findBy(text("Год")).closest(".input").$(".input__sub");
     private final SelenideElement errorMsgHolder = $$("span.input__top").findBy(text("Владелец")).closest(".input").$(".input__sub");
     private final SelenideElement errorMsgCvc = $$("span.input__top").findBy(text("CVC/CVV")).closest(".input").$(".input__sub");
-    private final SelenideElement notificationMsg = $(".notification");
+    private final SelenideElement waitingForRecording = $(".notification");
 
     public void clickButtonBuy() {
         buttonBuy.click();
@@ -48,16 +47,11 @@ public class BuyingTripPage {
     }
 
     public void emptyForm() {
-        numberCardField.getText().isEmpty();
-        monthField.getText().isEmpty();
-        yearField.getText().isEmpty();
-        holderField.getText().isEmpty();
-        cvcField.getText().isEmpty();
-    }
-
-    public void getMsg(String msg) {
-        notification.shouldBe(Condition.visible, Duration.ofSeconds(10))
-                .shouldHave(text(msg));
+        numberCardField.shouldBe(empty);
+        monthField.shouldBe(empty);
+        yearField.shouldBe(empty);
+        holderField.shouldBe(empty);
+        cvcField.shouldBe(empty);
     }
 
     public void getErrorMsgNumberCard(String msg) {
@@ -85,7 +79,12 @@ public class BuyingTripPage {
                 .should(Condition.visible);
     }
 
-    public void getMessage() {
-        notificationMsg.shouldBe(Condition.visible, Duration.ofSeconds(10));
+    public void getWaitForDbRecord() {
+        waitingForRecording.shouldBe(Condition.visible, Duration.ofSeconds(10));
+    }
+
+    public void getMsg(String msg) {
+        notification.shouldBe(Condition.visible, Duration.ofSeconds(10))
+                .shouldHave(text(msg));
     }
 }

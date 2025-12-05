@@ -25,4 +25,12 @@ public class SQLHelper {
             return runner.query(conn, dataSQL, new ScalarHandler<>());
         }
     }
+
+    @SneakyThrows
+    public static long getRecordsCount() {
+        var dataSQL = "SELECT COUNT(*) FROM payment_entity";
+        try (var conn = getConnection()) {
+            return runner.query(conn, dataSQL, new ScalarHandler<>());
+        }
+    }
 }

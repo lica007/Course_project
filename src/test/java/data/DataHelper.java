@@ -31,9 +31,17 @@ public class DataHelper {
         return "1111 2222 3333 4444 5";
     }
 
+    public static String getLettersNumberCard() {
+        return "1111 2222 hjil bvft";
+    }
+
     public static String getMonth(int monthAdd) {
         return LocalDate.now().plusMonths(monthAdd).format(DateTimeFormatter.ofPattern("MM"));
     }
+
+    public static String getNonExistentMonth() { return "13"; }
+
+    public static String getZeroMonth() { return "00"; }
 
     public static String getYear(int yearsAdd) {
         return String.valueOf(LocalDate.now().plusYears(yearsAdd).getYear()).substring(2);
@@ -66,13 +74,11 @@ public class DataHelper {
         return FAKER.numerify("###");
     }
 
-    public static String getCVC2Characters() {
+    public static String get2Characters() {
         return FAKER.numerify("##");
     }
 
-    public static String getCVC1Characters() {
-        return FAKER.numerify("#");
-    }
+    public static String get1Characters() { return FAKER.numerify("#"); }
 
     @Value
     @AllArgsConstructor
